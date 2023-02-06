@@ -1,4 +1,5 @@
 package db;
+//import java.sql.Connection;
 
 public class MySQL implements IBaseDatos {
     //TODO: Implementar cada método para que funcione con la base de datos MySQL
