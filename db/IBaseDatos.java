@@ -1,8 +1,9 @@
 package db;
 
+import java.sql.Connection;
+
 public interface IBaseDatos {
-    public void connect();
+    public Connection connect();
     public void disconnect();
     public void read();
-    public void update();
 }

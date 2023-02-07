@@ -16,9 +16,4 @@ public class SQLServer implements IBaseDatos {
     public void read(){
         System.out.println("Leyendo Registro con Sql");
     }
-
-    @Override
-    public void update(){
-        System.out.println("Actualizando Registro con Sql");
-    }
 }
