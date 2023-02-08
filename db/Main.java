@@ -17,24 +17,15 @@ public class Main {
 
             switch (opcion) {
                 case "1":
-                    Connection connection = null;
-                    //Conexion a la base de datos MySQL
-                    IBaseDatos conexionMySql = conectar.ConnectDB(TipoDeConexion.MYSQL);
-                    connection = conexionMySql.connect();
-                    if (connection != null) {
-                        System.out.println("-------------------------------------\nSe conecto a la base de forma exitosa\n-------------------------------------");
-                        conexionMySql.read();
-                        conexionMySql.disconnect();
-                    } else {
-                        System.out.println("No has podido conectarte");
-                    }
+                    //Conexión a la base de datos con el patrón desarrollado factory
+                    IBaseDatos conexionMysql = conectar.ConnectDB(TipoDeConexion.MYSQL);
+                    handleConnection(conexionMysql);
                     opcionInv = false;
                     break;
                 case "2":
-                    //Conexion a la base de datos SQLServer
+                    //Conexión a la base de datos con el patrón desarrollado factory
                     IBaseDatos conexionSql = conectar.ConnectDB(TipoDeConexion.SQLSERVER);
-                    //conexionSql.connect();
-                    conexionSql.disconnect();
+                    handleConnection(conexionSql);
                     opcionInv = false;
                     break;
                 default:
@@ -44,5 +35,18 @@ public class Main {
         }
         //Buenas prácticas se cierra el scanner
         scanner.close();
+    }
+
+    public static void handleConnection(IBaseDatos conexion){
+        Connection connection = null;
+
+        connection = conexion.connect();
+        if (connection != null) {
+            System.out.println("-------------------------------------\nSe conecto a la base de forma exitosa\n-------------------------------------");
+            conexion.read();
+            conexion.disconnect();
+        } else {
+            System.out.println("No has podido conectarte");
+        }
     }
 }

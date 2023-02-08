@@ -1,4 +1,5 @@
 package db;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,14 +13,16 @@ public class MySQL implements IBaseDatos {
 
     @Override
     public Connection connect(){
+        String service = "mysql";
         String host = "localhost";
+        int port = 3306;
         String user = "root";
         String password = "password";
         String database = "escuela";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = String.format("jdbc:mysql://%s/%s", host, database);
+            String url = String.format("jdbc:%s://%s:%d/%s", service, host, port, database);
             connection = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Error: " +e);
